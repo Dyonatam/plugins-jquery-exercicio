@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+
+
 </head>
 <!--
 
@@ -60,19 +63,70 @@
             <button type="submit">Enviar</button>
         </form>
     </div>
-    <script src="./js/jquery.mask.min.js"></script>
-    <script src="./js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
     <script src="./js/messages_pt_BR.min.js"></script>
-    <script src="./js/main.js"></script>
+
     <script>
         $(document).ready(function () {
-            $('#carousel').slick({
+            $('#carousel-imagens').slick({
                 autoplay: true,
                 arrows: false
             })
+
+            $('#cpf').mask('000.000.000-00')
+            $('#telefone').mask('(00)0 0000-0000')
+            $('#cep').mask('00000-000')
+
+            $('form').validate({
+                rules: {
+                    nome: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    telefone: {
+                        required: true
+                    },
+                    cpf: {
+                        required: true
+                    },
+                    cep: {
+                        required: true
+                    },
+                    endereco: {
+                        required: true
+                    },
+                },
+                messages: {
+                    nome: 'Por favor insira o seu nome.',
+                    email: 'É necessario inserir o seu e-mail.',
+                    telefone: 'Insira seu telefone de contato.',
+                    cpf: 'Insira o CPF do comprador.',
+                    cep: 'É necessario inserir seu CEP.',
+                    endereco: 'insira seu endereço residencial.'
+
+                },
+                submitHandler: function (form) {
+                    console.log(form)
+                },
+                invalidHandler: function (evento, validador) {
+                    let camposErrados = validador.numberOfInvalids()
+                    if (camposErrados) {
+                        alert(`Existem ${camposErrados} campos incorretos`)
+                    }
+                }
+
+
+            })
+
+
         })
     </script>
 </body>
